@@ -123,7 +123,9 @@ set smartcase
 
 set nu
 set guifont=Consolas:h11
-colorscheme CodeFactoryv3
+colorscheme molokai
+let g:molokai_original = 1
+" let g:rehash256 = 1
 
 " set cursorline
 " set nowrap
