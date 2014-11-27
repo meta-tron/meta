@@ -1,0 +1,63 @@
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Explanation of hardstatus line    ##
+
+hardstatus alwayslastline "%{=b}%{b}%-w%{.BW}%10>%n*%t%{-}%+w%< %=%{kG}%C%A %D, %Y-%m-%d"
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Some general options    ##
+
+# Turn off start message:
+startup_message off   # default: on
+
+autodetach on      # default: on
+
+# Set messages timeout to one second:
+msgwait 1
+
+#use bash as default shell.
+shell $SHELL
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+##    Keybindings    ##
+
+# bind F1  to select 1
+# bind F7  to detach screen session from this terminal
+# bind F8  to kill current screen window.
+# bind F9  to create a new screen
+# bind F10 to rename current screen window
+# bind F11 to move to previous window
+# bind F12 to move to next window
+#bindkey -k k1 select 1
+#bindkey -k k7 detach
+#bindkey -k k8 kill
+#bindkey -k k9 screen
+bindkey -k k; title
+#bindkey -k F1 prev
+#bindkey -k F2 next
+ # for shift right and left arrows
+bindkey ^[[D prev
+bindkey ^[[C next
+
+bindkey "^[k" eval "copy" "stuff ^b"  # enter copy mode and move up one page
+bindkey "^k" eval "copy" "stuff k"    # enter copy mode and move up one line
+bindkey -m "^[k" stuff ^b             # move up one page
+bindkey -m "^k" stuff k               # move up one line
+
+# THIS IS THE PRETTY BIT
+#change the hardstatus settings to give an window list at the bottom of the                                                                        
+##screen, with the time and date and with the current window highlighted                                                                            
+#hardstatus string '%{= mK}%-Lw%{= KW}%50>%n%f* %t%{= mK}%+Lw%< %{= kG}%-=%D %d %M %Y %c:%s%{-}'
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+# =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= #
+
+
+
+
+
+
+
+
+
+
+
+
