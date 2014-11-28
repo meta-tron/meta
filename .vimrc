@@ -62,13 +62,27 @@ endif
 
 " Required
 Plugin 'gmarik/Vundle.vim'
-   
+" User defined 
 Plugin 'Lucius'
 Plugin 'a.vim'
 Plugin 'Align'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'Lokaltog/vim-powerline'
 Plugin 'scrooloose/nerdtree'
+Plugin 'bufexplorer.zip'
+Plugin 'OmniCppComplete'
+Plugin 'std_c.zip'
+" Plugin 'ccvext.vim' " <Leader>sy/sc
+Plugin 'cSyntaxAfter'
+Plugin 'flazz/vim-colorschemes'
+" Plugin 'majutsushi/tagbar'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'taglist.vim'
+
+
+" Need python interface
+" Plugin 'Conque-Shell'
+" Plugin 'Rip-Rip/clang_complete'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -91,7 +105,7 @@ filetype plugin on
 
 set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=ucs-bom,utf-8,gbk,cp936,latin-1
+set fileencodings=utf-8,ucs-bom,cp936,gbk,gb2312,big5,latin1 
  
 set fileformat=unix
 set fileformats=unix,dos,mac 
@@ -108,6 +122,7 @@ set autoread
 " delete spaces at line end
 nmap cS :%s/\s\+$//g<CR>:noh<CR>
 nmap cM :%s/\r$//g<CR>:noh<CR>
+let mapleader=";"
 
 set hlsearch
 set incsearch
@@ -115,14 +130,68 @@ set ignorecase
 set smartcase
 
 set nu
-set laststatus=2
-" set cmdheight=2
+" set guifont=Consolas:h11
+colorscheme molokai
+let g:molokai_original = 1
+if g:islinux
+    let g:rehash256 = 1
+endif
+
 " set cursorline
-" set guifont=YaHei_Consolas_Hybrid:h10
 " set nowrap
 " set shortmess=atI"
+set nobackup
 
-colorscheme desert
+" change work dir to where the edited file lies
+au BufRead,BufNewFile,BufEnter * cd %:p:h
+
+" shortcut map
+" clean spaces following line end
+nmap cS :%s/\s\+$//g<CR>:noh<CR>
+" clean ^M
+nmap cM :%s/\r$//g<CR>:noh<CR>
+" window moving
+noremap <c-k> <c-w>k
+noremap <c-j> <c-w>j
+noremap <c-h> <c-w>h
+noremap <c-l> <c-w>l
+
+" GUI tool bar, Ctrl+F11
+if g:isGUI
+    set guioptions-=m
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
+    nmap <silent> <c-F11> :if &guioptions =~# 'm' <Bar>
+        \set guioptions-=m <Bar>
+        \set guioptions-=T <Bar>
+        \set guioptions-=r <Bar>
+        \set guioptions-=L <Bar>
+    \else <Bar>
+        \set guioptions+=m <Bar>
+        \set guioptions+=T <Bar>
+        \set guioptions+=r <Bar>
+        \set guioptions+=L <Bar>
+    \endif<CR>
+endif
+
+" vim-powerline
+set laststatus=2
+set t_Co=256
+" set cmdheight=2
 
 " NERD tree
 nmap <F2> :NERDTreeToggle<CR>
+
+" cSyntaxAfter
+au! BufRead,BufNewFile,BufEnter *.{c,cpp,h,java,javascript} call CSyntaxAfter()
+
+" tagbar
+nmap <F3> :TlistToggle<CR>
+
+" OmniCppComplete
+let OmniCpp_DefaultNamespaces = ['_GLIBCXX_STD']
+map <F4> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --languages=c++ .<CR>
+
+set tags+=$HOME/.tags/stdcpp.tags
+set tags+=$HOME/.tags/mecore.tags
